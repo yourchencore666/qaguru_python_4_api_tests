@@ -27,3 +27,15 @@ list_user_schema = Schema(
     extra=PREVENT_EXTRA,
     required=True
 )
+
+resource_schema = Schema(
+    {
+        "id": int,
+        "name": str,
+        "year": int,
+        "color": str,
+        "pantone_value": str
+    },
+    extra=PREVENT_EXTRA,
+    required=True
+)
