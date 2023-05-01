@@ -39,3 +39,34 @@ resource_schema = Schema(
     extra=PREVENT_EXTRA,
     required=True
 )
+
+created_user_schema = Schema(
+    {
+        "name": str,
+        "job": str,
+        "id": str,
+        "createdAt": str
+    },
+    extra=PREVENT_EXTRA,
+    required=True
+)
+
+updated_user_schema = Schema(
+    {
+        "name": str,
+        "job": str,
+        "updatedAt": str
+    },
+    extra=PREVENT_EXTRA,
+    required=True
+)
+
+register_schema = Schema(
+    {
+        "id": int,
+        "token": str
+    },
+    extra=PREVENT_EXTRA,
+    required=True
+)
+
