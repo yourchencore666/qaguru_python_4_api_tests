@@ -11,13 +11,14 @@ LOGIN = os.getenv('user_login')
 PASSWORD = os.getenv('user_password')
 API_URL = os.getenv('api_url')
 WEB_URL = os.getenv('web_url')
+REQRES_URL = os.getenv('reqres_api_url')
 
 browser.config.base_url = WEB_URL
 
 
 @pytest.fixture(scope="session")
 def reqres():
-    reqres_session = BaseSession(base_url="https://reqres.in/api")
+    reqres_session = BaseSession(base_url=REQRES_URL)
     return reqres_session
 
 
