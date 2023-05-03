@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Artem Yurchenko <yourchencore@yandex.ru>"]
 readme = "README.md"
-packages = [{include = "qaguru_python_4_api_tests"}]
+packages = [{ include = "qaguru_python_4_api_tests" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -27,5 +27,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 log_cli = 1
+log_cli_format = "%(asctime)s %(message)s"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 log_level = "INFO"
 addopts = " -s --clean-alluredir --alluredir=allure-results --allure-no-capture "

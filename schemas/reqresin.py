@@ -1,9 +1,16 @@
-from voluptuous import Schema, PREVENT_EXTRA
+from voluptuous import Schema, PREVENT_EXTRA, Length, All
+
+
+def is_email_true(email):
+    if "@" in email and "." in email:
+        return True
+    raise ValueError("Not email")
+
 
 user_schema = Schema(
     {
         "id": int,
-        "email": str,
+        "email": All(str, is_email_true),
         "first_name": str,
         "last_name": str,
         "avatar": str
@@ -18,7 +25,7 @@ list_user_schema = Schema(
         "per_page": int,
         "total": int,
         "total_pages": int,
-        "data": [user_schema],
+        "data": All([user_schema], Length(min=1)),
         "support": {
             "url": str,
             "text": str
@@ -69,4 +76,3 @@ register_schema = Schema(
     extra=PREVENT_EXTRA,
     required=True
 )
-

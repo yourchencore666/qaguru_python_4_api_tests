@@ -12,14 +12,23 @@ PASSWORD = os.getenv('user_password')
 API_URL = os.getenv('api_url')
 WEB_URL = os.getenv('web_url')
 REQRES_URL = os.getenv('reqres_api_url')
+NINJAS_URL = os.getenv('ninjas_api_url')
+NINJAS_API_KEY = os.getenv('ninjas_api_key')
 
 browser.config.base_url = WEB_URL
 
 
 @pytest.fixture(scope="session")
 def reqres():
-    reqres_session = BaseSession(base_url=REQRES_URL)
-    return reqres_session
+    with BaseSession(base_url=REQRES_URL) as session:
+        yield session
+
+
+@pytest.fixture(scope="session")
+def ninjas():
+    with BaseSession(base_url=NINJAS_URL) as session:
+        session.headers = {"X-Api-Key": NINJAS_API_KEY}
+        yield session
 
 
 @pytest.fixture(scope="session")
