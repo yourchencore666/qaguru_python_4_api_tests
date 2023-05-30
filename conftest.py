@@ -44,3 +44,18 @@ def demowebshop():
     authorization_cookie = response.cookies.get('NOPCOMMERCE.AUTH')
     browser.driver.add_cookie({"name": "NOPCOMMERCE.AUTH", "value": authorization_cookie})
     return browser.driver.get_cookies()
+
+
+@pytest.fixture(scope="session")
+def demoqashop_session():
+    with BaseSession(base_url=API_URL) as session:
+        auth_cookie_name = "NOPCOMMERCE.AUTH"
+        response = session.post(
+            url='/login',
+            data={'Email': LOGIN, 'Password': PASSWORD},
+            headers={'content-type': "application/x-www-form-urlencoded; charset=UTF-8"},
+            allow_redirects=False
+        )
+        auth_cookie = response.cookies.get(auth_cookie_name)
+        session.cookies.set(auth_cookie_name, auth_cookie)
+        yield session
